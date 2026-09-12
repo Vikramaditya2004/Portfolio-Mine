@@ -747,7 +747,7 @@ span {
 
 
 /* ================================
-   TABLET
+   EDUCATION - TABLET
    ================================ */
 
 @media (min-width: 601px) and (max-width: 995px) {
@@ -776,99 +776,141 @@ span {
 
 
 /* ================================
-   MOBILE
+   EDUCATION - MOBILE
    ================================ */
 
 @media (max-width: 600px) {
 
     .education {
-        padding: 10rem 5% 7rem;
+        width: 100%;
+        min-height: auto;
+        padding: 9rem 1.5rem 6rem;
+        overflow: hidden;
     }
 
     .education-heading {
-        margin-bottom: 5rem;
+        width: 100%;
+        margin: 0 auto 4rem;
+        padding: 0 1rem;
     }
 
-    .section-label {
-        font-size: 1.2rem;
-        letter-spacing: 0.3rem;
+    .education-heading h2 {
+        font-size: 4rem;
     }
 
     .education-intro {
-        font-size: 1.45rem;
+        font-size: 1.4rem;
+        line-height: 1.7;
     }
 
-
-    /* Move timeline to left */
-
+    /* Timeline container */
     .education-story {
-        padding-left: 2.8rem;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0 0 0 3rem;
     }
 
+    /* Vertical line */
     .story-line {
-        left: 0.8rem;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 1rem;
+        width: 2px;
         transform: none;
     }
 
-
-    /* Single-column cards */
-
+    /* All cards become one column */
     .education-card,
     .education-card-left,
     .education-card-right {
-
+        position: relative;
         width: 100%;
-
-        margin: 0 0 5rem;
-
+        max-width: 100%;
+        margin: 0 0 4rem;
+        padding: 0;
         text-align: left;
+        transform: translateY(40px);
     }
 
-
-    /* Mobile timeline dots */
-
+    /* Timeline dot */
     .story-dot,
     .education-card-left .story-dot,
     .education-card-right .story-dot {
-
+        position: absolute;
+        top: 2.5rem;
         left: -2.65rem;
-
         right: auto;
 
-        top: 3rem;
+        width: 14px;
+        height: 14px;
 
-        width: 15px;
-        height: 15px;
+        border: 3px solid #050505;
+        border-radius: 50%;
+
+        background: #b74b4b;
+
+        box-shadow:
+            0 0 0 3px rgba(183, 75, 75, 0.25),
+            0 0 15px #b74b4b;
     }
 
+    /* Year */
+    .education-year {
+        font-size: 1.2rem;
+        letter-spacing: 0.15rem;
+        margin-bottom: 1rem;
+    }
 
+    /* Card */
     .education-card-content {
-        padding: 2.4rem 2rem;
+        width: 100%;
+        padding: 2rem 1.6rem;
+        border-radius: 1.5rem;
+
+        overflow: hidden;
+        word-wrap: break-word;
     }
 
-
-    .education-card h3 {
-        font-size: 2.5rem;
+    /* Number */
+    .education-number,
+    .education-card-left .education-number,
+    .education-card-right .education-number {
+        position: static;
+        display: block;
+        margin-bottom: 1rem;
     }
 
-    .education-card h4 {
-        font-size: 1.5rem;
-    }
-
-    .education-card p {
-        font-size: 1.4rem;
-    }
-
-
+    /* Icon */
     .education-icon {
         width: 5rem;
         height: 5rem;
-
         font-size: 2rem;
+        margin-bottom: 1.2rem;
     }
 
-}
-.education-card.show {
-    opacity: 1;
-    transform: translateY(0);
+    /* Card heading */
+    .education-card h3 {
+        font-size: 2.3rem;
+        line-height: 1.3;
+        margin-bottom: 0.6rem;
+    }
+
+    .education-card h4 {
+        font-size: 1.45rem;
+        line-height: 1.5;
+        margin-bottom: 1.2rem;
+    }
+
+    .education-card p {
+        font-size: 1.35rem;
+        line-height: 1.7;
+    }
+
+    /* Animation */
+    .education-card.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
