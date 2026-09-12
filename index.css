@@ -212,7 +212,7 @@ span {
     width: calc(100% + 8px);
     height: 100%;
     border-left: 3px solid black;
-    /* right: -8; */
+    right: -8px;
     animation: cursor 0.6s infinite;
 }
 
