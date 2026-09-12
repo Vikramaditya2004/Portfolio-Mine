@@ -4,15 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vikram's personal portfolio website">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="index.css">
-    <title>Portfolio Website</title>
+    <title>Vikram | Portfolio</title>
 </head>
 <body>
     <header>
         <a href="#" class="logo">Vikram</a>
 
-        <nav>
+        <button class="menu-toggle" type="button" aria-label="Open navigation menu"
+            aria-expanded="false" aria-controls="main-navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav id="main-navigation">
             <a href="#" class="active"> Home</a>
             <a href="#" >Services</a>
             <a href="#" >Skills</a>
@@ -21,9 +27,11 @@
             <a href="#" >Contact</a>
         </nav>
     </header>
+
+    <main>
     <section class="home">
         <div class="home-img">
-            <img src="main.jpeg" alt="">
+            <img src="main.jpeg" alt="Vikram profile photo">
         </div>
         <div class="home-content">
             <h1>Hi, It's <span>Vikram</span></h1>
@@ -43,6 +51,36 @@
             <a href="mailto:Vikram.2002.aditya@gmail.com" class="btn">Hire me</a>
         </div>
     </section>
+    </main>
+
+    <script>
+        const menuToggle = document.querySelector(".menu-toggle");
+        const nav = document.querySelector("nav");
+        const navLinks = document.querySelectorAll("nav a");
+
+        menuToggle.addEventListener("click", () => {
+            const isOpen = nav.classList.toggle("active");
+            menuToggle.setAttribute("aria-expanded", isOpen);
+            menuToggle.setAttribute(
+                "aria-label",
+                isOpen ? "Close navigation menu" : "Open navigation menu"
+            );
+            menuToggle.innerHTML = isOpen
+                ? '<i class="fa-solid fa-xmark"></i>'
+                : '<i class="fa-solid fa-bars"></i>';
+        });
+
+        navLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+                nav.classList.remove("active");
+                menuToggle.setAttribute("aria-expanded", "false");
+                menuToggle.setAttribute("aria-label", "Open navigation menu");
+                menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+            });
+        });
+    </script>
+
+    
 </body>
 </html>
 
