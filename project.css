@@ -10,6 +10,12 @@
 .section-title h1 {
     font-size: 48px;
     margin-bottom: 10px;
+    
+}
+.section-title span {
+    background: linear-gradient(90deg, #00c6ff, #8a2be2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .section-title p {
