@@ -1,61 +1,147 @@
-const menuToggle = document.querySelector(".menu-toggle");
-const nav = document.querySelector("nav");
-const navLinks = document.querySelectorAll("nav a");
+// const menuToggle = document.querySelector(".menu-toggle");
+// const nav = document.querySelector("nav");
+// const navLinks = document.querySelectorAll("nav a");
 
-menuToggle.addEventListener("click", () => {
-  const isOpen = nav.classList.toggle("active");
-  menuToggle.setAttribute("aria-expanded", isOpen);
-  menuToggle.setAttribute(
-    "aria-label",
-    isOpen ? "Close navigation menu" : "Open navigation menu",
-  );
-  menuToggle.innerHTML = isOpen
-    ? '<i class="fa-solid fa-xmark"></i>'
-    : '<i class="fa-solid fa-bars"></i>';
-});
+// menuToggle.addEventListener("click", () => {
+//   const isOpen = nav.classList.toggle("active");
+//   menuToggle.setAttribute("aria-expanded", isOpen);
+//   menuToggle.setAttribute(
+//     "aria-label",
+//     isOpen ? "Close navigation menu" : "Open navigation menu",
+//   );
+//   menuToggle.innerHTML = isOpen
+//     ? '<i class="fa-solid fa-xmark"></i>'
+//     : '<i class="fa-solid fa-bars"></i>';
+// });
 
-navLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    nav.classList.remove("active");
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute("aria-label", "Open navigation menu");
-    menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
-  });
-});
-
-
-
-/* =================================
-   Education Scroll Animation
-   ================================= */
+// navLinks.forEach((link) => {
+//   link.addEventListener("click", () => {
+//     nav.classList.remove("active");
+//     menuToggle.setAttribute("aria-expanded", "false");
+//     menuToggle.setAttribute("aria-label", "Open navigation menu");
+//     menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+//   });
+// });
 
 
-   
-const educationCards = document.querySelectorAll(".education-card");
 
-const educationObserver = new IntersectionObserver(
-    (entries) => {
+document.addEventListener("DOMContentLoaded", () => {
 
-        entries.forEach((entry) => {
+    const headerContainer = document.getElementById("header");
 
-            if (entry.isIntersecting) {
+    if (!headerContainer) return;
 
-                entry.target.classList.add("show");
+    fetch("header.html")
+        .then(response => {
 
-                educationObserver.unobserve(entry.target);
-
+            if (!response.ok) {
+                throw new Error("Unable to load header.html");
             }
+
+            return response.text();
+
+        })
+        .then(html => {
+
+            // Insert common header
+            headerContainer.innerHTML = html;
+
+            // IMPORTANT:
+            // Run menu code AFTER header is inserted
+            initNavigation();
+
+        })
+        .catch(error => {
+
+            console.error("Header error:", error);
 
         });
 
-    },
-    {
-        threshold: 0.2
-    }
-);
-
-educationCards.forEach((card) => {
-
-    educationObserver.observe(card);
-
 });
+
+
+function initNavigation() {
+
+    const menuBtn = document.getElementById("menuBtn");
+    const nav = document.querySelector(".main-navigation");
+
+    if (!menuBtn || !nav) {
+        console.error("Mobile menu elements not found.");
+        return;
+    }
+
+
+    // =========================
+    // MOBILE MENU TOGGLE
+    // =========================
+
+    menuBtn.addEventListener("click", () => {
+
+        nav.classList.toggle("active");
+
+        const icon = menuBtn.querySelector("i");
+
+        if (nav.classList.contains("active")) {
+
+            icon.classList.remove("fa-bars");
+            icon.classList.add("fa-xmark");
+
+            menuBtn.setAttribute("aria-label", "Close menu");
+
+        } else {
+
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+
+            menuBtn.setAttribute("aria-label", "Open menu");
+
+        }
+
+    });
+
+
+    // =========================
+    // CLOSE MENU AFTER CLICK
+    // =========================
+
+    nav.querySelectorAll("a").forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            nav.classList.remove("active");
+
+            const icon = menuBtn.querySelector("i");
+
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+
+        });
+
+    });
+
+
+    // =========================
+    // ACTIVE PAGE
+    // =========================
+
+    const currentPage =
+        window.location.pathname.split("/").pop() || "index.html";
+
+    nav.querySelectorAll("a").forEach(link => {
+
+        const href = link.getAttribute("href");
+
+        if (!href) return;
+
+        const linkPage =
+            href.split("/").pop().split("#")[0];
+
+        if (linkPage === currentPage) {
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+}
